@@ -1,24 +1,14 @@
 import express from "express"
 import 'dotenv/config'
-
+import beastRouter from "./routes/beast.js"
+import morgan from "morgan"
 
 const app = express();
 const port = process.env.PUERTO || 3000;
 
-// get(" RUTA ", (req, res)=> {})
-app.get("/", (req, res) => {
-   res.send("Esta es mi api");
-})
+app.use(morgan("tiny"))
 
-
-app.get("/test", (req, res) => {
-   res.json({
-      "name": "[TuNombre]",
-      "date": "2024-10-28",
-      "timestamp": Date.now()
-   })
-})
-
+app.use("/apiv1", beastRouter)
 // listen ( PUERTO ,  CALLBACK)
 app.listen(port, () => {
    console.log("Mi servidor esta corriendo 🔥🚀");
